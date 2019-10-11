@@ -15,17 +15,13 @@ try {
 
     $request = Request::createFromGlobals();
 
-// Fetch method and URI from somewhere
-    $httpMethod = $request->getMethod();
     $uri = $request->getRequestUri();
-
-// Strip query string (?foo=bar) and decode URI
     if (false !== $pos = strpos($uri, '?')) {
         $uri = substr($uri, 0, $pos);
     }
     $uri = rawurldecode($uri);
 
-    $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+    $routeInfo = $dispatcher->dispatch($request->getMethod(), $uri);
     switch ($routeInfo[0]) {
         case FastRoute\Dispatcher::NOT_FOUND:
             $response = new JsonResponse(['Not Found'], JsonResponse::HTTP_NOT_FOUND);
