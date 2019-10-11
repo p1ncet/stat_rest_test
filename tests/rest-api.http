@@ -1,0 +1,7 @@
+PUT http://localhost:8888/stat/cy
+
+###
+
+GET http://localhost:8888/stat
+
+###
